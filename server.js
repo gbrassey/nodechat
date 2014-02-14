@@ -2,7 +2,8 @@ var express = require('express')
   , app = express()
   , server = app.listen(3000)
   , jade = require('jade')
-  , io = require('socket.io').listen(server);
+  , io = require('socket.io').listen(server)
+  , db = require('./lib/db');
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
@@ -31,4 +32,8 @@ io.sockets.on('connection', function(socket) {
 			socket.broadcast.emit('message', { message: name + ' has left the chat', pseudo: "ADMIN" });
 		});
 	});
+});
+
+db.open(function() {
+	console.log('database connected');
 });
