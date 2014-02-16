@@ -68,7 +68,12 @@ db.open(function() {
 	app.get('/', routes.getLogin);
 	app.get('/chat', lib.ensureAuthenticated, routes.getChat);
 	app.get('/api/user/:username', routes.getUser);
-	app.get('/api/todo/:assignee/:todo', routes.createTodo);
+	app.get('/api/todo/create/:assignee/:todo', routes.createTodo);
+	app.get('/api/todo/get', routes.getTodos);
+	app.get('/api/todo/get/:username', routes.getAssignedTodos);
+	app.get('/api/todo/complete/:id', routes.completeTodo);
+	app.get('/api/todo/incomplete/:id', routes.incompleteTodo);
+	app.get('/api/todo/delete/:id', routes.deleteTodo);
 	app.post('/login', routes.login);
 	app.post('/signup', routes.signup);
 });

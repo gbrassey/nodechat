@@ -35,7 +35,7 @@ function sendTodo() {
 	if (todo != "") {
 		$.ajax({
 			type: 'GET'
-			, url: '/api/todo/' + assignee + '/' + todo
+			, url: '/api/todo/create/' + assignee + '/' + todo
 				}).done(function(created) {
 					if (created) {
 						console.log('created ' + created.todo + ' todo for ' + created.assignee);

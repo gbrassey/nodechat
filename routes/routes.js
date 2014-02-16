@@ -48,15 +48,54 @@ module.exports = {
 	},
 	createTodo: function(req, res) {
 		lib.getUser(req.params.assignee, function(err, assignee) {
-			lib.createTodo(req.params.todo, String(assignee._id), req.session._id, function(err, data) {
+			lib.createTodo(req.params.todo, String(assignee._id), String(req.session._id), function(err, data) {
 				if (data) {
 					lib.getUserByID(String(data.assignee_id), function(err, user) {
-						data.assignee = user.username;
-						res.send(data);
+						if (user) {
+							data.assignee = user.username;
+							res.send(data);
+						} else res.send(false);
 					});
 				}
 				else res.send(false);
 			});			
+		});
+	},
+	getTodos: function(req, res) {
+		lib.getTodos(function(err, data) {
+			if (data) res.json(data);
+			else res.send(false);
+		});
+	},
+	getAssignedTodos: function(req, res) {
+		lib.getUser(req.params.username, function(err, user) {
+			if (user) {
+				lib.getAssignedTodos(String(user._id), function(err, data) {
+					if (data) {
+						res.json(data);
+					} else res.send(false);
+				})
+			} else res.send(false);
+		});
+	},
+	completeTodo: function(req, res) {
+		lib.updateTodo(String(req.params.id), {complete: true}, function(err, data) {
+			if (data) {
+				res.send('1');
+			} else res.send(false);
+		});
+	},
+	incompleteTodo: function(req, res) {
+		lib.updateTodo(String(req.params.id), {complete: false}, function(err, data) {
+			if (data) {
+				res.send('1');
+			} else res.send(false);
+		});
+	},
+	deleteTodo: function(req, res) {
+		lib.deleteTodo(String(req.params.id), function(err, data) {
+			if (data) res.send('1');
+			else res.send(false);
 		});
 	}
 }
