@@ -48,12 +48,16 @@ module.exports = {
 	},
 	createTodo: function(req, res) {
 		lib.getUser(req.params.assignee, function(err, assignee) {
-			console.log(req.params.todo + " " + assignee._id + " " + req.session._id);
-			lib.createTodo(req.params.todo, assignee._id, req.session._id, function(err, data) {
-				if (data) res.send(data);
+			lib.createTodo(req.params.todo, String(assignee._id), req.session._id, function(err, data) {
+				if (data) {
+					lib.getUserByID(String(data.assignee_id), function(err, user) {
+						data.assignee = user.username;
+						res.send(data);
+					});
+				}
 				else res.send(false);
 			});			
-		})
+		});
 	}
 }
 

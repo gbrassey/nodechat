@@ -38,7 +38,7 @@ function sendTodo() {
 			, url: '/api/todo/' + assignee + '/' + todo
 				}).done(function(created) {
 					if (created) {
-						console.log('created ' + created.todo + ' todo for this ID# ' + created.assignee_id);
+						console.log('created ' + created.todo + ' todo for ' + created.assignee);
 					}
 					else {
 						console.log('error');
@@ -120,7 +120,7 @@ $(function() {
 			$('.create-button').addClass('disabled')
 				.attr('disabled', true);
 		}
-	})
+	});
 	function validateEmail(email) { 
 		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 		return re.test(email);
