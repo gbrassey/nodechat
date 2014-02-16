@@ -1,0 +1,19 @@
+<%- include header %>
+			<div id="signup">
+				<form id="signup-form" action="/signup" method="post" class="form-horizontal">
+					<div class="control-group">
+						<input type="text" name="username" placeholder="Username" class="input-xlarge uname"/><span id="usernameFeedback"></span>
+					</div>
+					<div class="control-group">
+						<input type="text" name="email" placeholder="Email" class="input-xlarge email"/><span id="emailFeedback"></span>
+					</div>
+					<div class="control-group">
+						<input type="password" name="password" placeholder="Password" class="input-xlarge password"/><span id="passwordFeedback"></span>
+					</div>
+					<div class="control-group">
+						<input type="password" name="password2" placeholder="Re-Type Password" class="input-xlarge password2"/><span id="password2Feedback"></span>
+					</div>
+					<button class="btn btn-primary create-button" type="submit">Submit</button>
+				</form>
+			</div>
+<% include footer %>

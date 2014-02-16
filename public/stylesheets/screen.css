@@ -1,0 +1,56 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 8, ../../sass/screen.scss */
+.form-control {
+  display: inline-block;
+  width: auto;
+}
+
+/* line 12, ../../sass/screen.scss */
+input, label {
+  vertical-align: middle;
+}
+
+/* line 16, ../../sass/screen.scss */
+.chat-wrap {
+  border: 3px solid grey;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  height: 200px;
+  margin: 20px 0;
+  overflow-y: scroll;
+  width: 100%;
+}
+/* line 23, ../../sass/screen.scss */
+.chat-wrap #chatEntries {
+  padding: 0 10px;
+}
+/* line 26, ../../sass/screen.scss */
+.chat-wrap .username {
+  font-weight: 500;
+  color: #b30000;
+}
+
+/* line 31, ../../sass/screen.scss */
+.todo-wrap {
+  height: 200px;
+  margin: 20px 0;
+}
+/* line 34, ../../sass/screen.scss */
+.todo-wrap .todo-list {
+  list-style: none;
+  padding: 0;
+}
+/* line 37, ../../sass/screen.scss */
+.todo-wrap .todo-list input, .todo-wrap .todo-list label {
+  margin: 0;
+}
+/* line 38, ../../sass/screen.scss */
+.todo-wrap .todo-list input {
+  margin-right: 5px;
+}
