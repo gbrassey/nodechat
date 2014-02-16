@@ -68,6 +68,7 @@ db.open(function() {
 	app.get('/', routes.getLogin);
 	app.get('/chat', lib.ensureAuthenticated, routes.getChat);
 	app.get('/api/user/:username', routes.getUser);
+	app.get('/api/todo/:assignee/:todo', routes.createTodo);
 	app.post('/login', routes.login);
 	app.post('/signup', routes.signup);
 });

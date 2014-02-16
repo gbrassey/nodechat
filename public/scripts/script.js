@@ -29,9 +29,28 @@ function setLogin() {
 	}
 }
 
+function sendTodo() {
+	var todo = $("#todoInput").val(),
+		assignee = $("#assignee").val();
+	if (todo != "") {
+		$.ajax({
+			type: 'GET'
+			, url: '/api/todo/' + assignee + '/' + todo
+				}).done(function(created) {
+					if (created) {
+						console.log('created ' + created.todo + ' todo for this ID# ' + created.assignee_id);
+					}
+					else {
+						console.log('error');
+					}
+		});
+	}
+}
+
 $(function() {
 	$("#setLogin").click(function() { setLogin() });
-	$("#submit").click(function() { sendMessage(); });
+	$("#msgSubmit").click(function() { sendMessage(); });
+	$("#todoSubmit").click(function() { sendTodo(); });
 	$("#messageInput").keyup(function(event){
 	    if(event.keyCode == 13){
 	        $("#messageInput + #submit").click();
@@ -48,11 +67,11 @@ $(function() {
 				, url: '/api/user/' + uname
 					}).done(function(found) {
 				if (found == '1') {
-					$('.uname').removeClass('good').addClass('bad');
+					$('.uname').parent('.form-group').removeClass('has-success').addClass('has-error');
 					$('#usernameFeedback').text('That username is already taken. Please choose another one.');
 				}
 				else {
-					$('.uname').removeClass('bad').addClass('good');
+					$('.uname').parent('.form-group').removeClass('has-error').addClass('has-success');
 					$('#usernameFeedback').text('');
 				}
 			});
@@ -62,10 +81,10 @@ $(function() {
 		var email = $('.email').val();
 		if (email) {
 			if (validateEmail(email)) {
-				$('.email').removeClass('bad').addClass('good');
+				$('.email').parent('.form-group').removeClass('has-error').addClass('has-success');
 				$('#emailFeedback').text('');
 			} else {
-				$('.email').removeClass('good').addClass('bad');
+				$('.email').parent('.form-group').removeClass('has-success').addClass('has-error');
 				$('#emailFeedback').text('Please use a valid Email');
 			}
 		}
@@ -73,28 +92,28 @@ $(function() {
 	$('#signup .password').blur(function(e) {
 		var password = $('.password').val();
 		if (password) {
-			$('.password').removeClass('bad').addClass('good');
+			$('.password').parent('.form-group').removeClass('has-error').addClass('has-success');
 			$('#passwordFeedback').text('');
 		} else {
-			$('.password').removeClass('good').addClass('bad');
+			$('.password').parent('.form-group').removeClass('has-success').addClass('has-error');
 			$('#passwordFeedback').text('Please enter a password');
 		}
 	});
 	$('#signup .password2').blur(function(e) {
 		var password = $('.password').val();
 		var password2 = $('.password2').val();
-		if ($('.password').hasClass('good')) {
+		if ($('.password').parent('.form-group').hasClass('has-success')) {
 			if (password2 === password) {
-				$('.password2').removeClass('bad').addClass('good');
+				$('.password2').parent('.form-group').removeClass('has-error').addClass('has-success');
 				$('#password2Feedback').text('');
 			} else {
-				$('.password2').removeClass('good').addClass('bad');
+				$('.password2').parent('.form-group').removeClass('has-success').addClass('has-error');
 				$('#password2Feedback').text('Password does not match');
 			}
 		}
 	});
 	$('#signup input').blur(function(e) {
-		if ($('.email').hasClass('good') && $('.uname').hasClass('good') && $('.password').hasClass('good') && $('.password2').hasClass('good')) {
+		if ($('.email').parent('.form-group').hasClass('has-success') && $('.uname').parent('.form-group').hasClass('has-success') && $('.password').parent('.form-group').hasClass('has-success') && $('.password2').parent('.form-group').hasClass('has-success')) {
 			$('.create-button').removeClass('disabled')
 				.attr('disabled', false);
 		} else {

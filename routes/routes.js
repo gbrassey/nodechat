@@ -45,6 +45,15 @@ module.exports = {
 		} else {
 			res.redirect('/signup');
 		}
+	},
+	createTodo: function(req, res) {
+		lib.getUser(req.params.assignee, function(err, assignee) {
+			console.log(req.params.todo + " " + assignee._id + " " + req.session._id);
+			lib.createTodo(req.params.todo, assignee._id, req.session._id, function(err, data) {
+				if (data) res.send(data);
+				else res.send(false);
+			});			
+		})
 	}
 }
 

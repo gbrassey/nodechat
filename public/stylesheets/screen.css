@@ -5,15 +5,11 @@
 /* line 8, ../../sass/screen.scss */
 .form-control {
   display: inline-block;
+  vertical-align: middle;
   width: auto;
 }
 
-/* line 12, ../../sass/screen.scss */
-input, label {
-  vertical-align: middle;
-}
-
-/* line 16, ../../sass/screen.scss */
+/* line 14, ../../sass/screen.scss */
 .chat-wrap {
   border: 3px solid grey;
   -webkit-border-radius: 5px;
@@ -26,31 +22,23 @@ input, label {
   overflow-y: scroll;
   width: 100%;
 }
-/* line 23, ../../sass/screen.scss */
+/* line 21, ../../sass/screen.scss */
 .chat-wrap #chatEntries {
   padding: 0 10px;
 }
-/* line 26, ../../sass/screen.scss */
+/* line 24, ../../sass/screen.scss */
 .chat-wrap .username {
   font-weight: 500;
   color: #b30000;
 }
 
-/* line 31, ../../sass/screen.scss */
+/* line 29, ../../sass/screen.scss */
 .todo-wrap {
   height: 200px;
   margin: 20px 0;
 }
-/* line 34, ../../sass/screen.scss */
+/* line 32, ../../sass/screen.scss */
 .todo-wrap .todo-list {
   list-style: none;
   padding: 0;
-}
-/* line 37, ../../sass/screen.scss */
-.todo-wrap .todo-list input, .todo-wrap .todo-list label {
-  margin: 0;
-}
-/* line 38, ../../sass/screen.scss */
-.todo-wrap .todo-list input {
-  margin-right: 5px;
 }
