@@ -13,12 +13,14 @@
 			<select class="form-control">
 				<option value="Global">Global</option>
 				<option value="Dave">Dave</option>
-				<option value="George">George</option>
+				<option value="George">George | {{todos.length}}</option>
 				<option value="Michael">Michael</option>
 			</select>
-			<ul class="todo-list">
-				<li><div class="checkbox"><label><input type="checkbox">Build Chat App</label></div></li>
-			</ul>
+			<div class="todo-list">
+				<ul>
+					<li ng-repeat="todo in todos"><div class="checkbox"><label><input type="checkbox" ng-click="toggleTodo(todo._id)">{{todo.todo}}</label></div></li>
+				</ul>
+			</div>
 		</div>
 		<div id="todoControls">
 			<input type="input" id="todoInput" class="form-control">

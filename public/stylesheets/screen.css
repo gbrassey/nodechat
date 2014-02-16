@@ -39,6 +39,11 @@
 }
 /* line 32, ../../sass/screen.scss */
 .todo-wrap .todo-list {
+  height: 166px;
+  overflow-y: scroll;
+}
+/* line 35, ../../sass/screen.scss */
+.todo-wrap .todo-list ul {
   list-style: none;
   padding: 0;
 }

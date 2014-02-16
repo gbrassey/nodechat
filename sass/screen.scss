@@ -30,7 +30,11 @@
 	height: 200px;
 	margin: 20px 0;
 	.todo-list {
-		list-style: none;
-		padding: 0;
+		height: 166px;
+		overflow-y: scroll;
+		ul {
+			list-style: none;
+			padding: 0;
+		}
 	}
 }

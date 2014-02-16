@@ -78,6 +78,15 @@ module.exports = {
 			} else res.send(false);
 		});
 	},
+	toggleTodo: function(req, res) {
+		lib.getTodo(String(req.params.id), function(err, todo) {
+			lib.updateTodo(String(todo._id), {complete: !(todo.complete)}, function(err, data) {
+				if (data) {
+					res.send('1');
+				} else res.send(false);
+			});			
+		});
+	},
 	completeTodo: function(req, res) {
 		lib.updateTodo(String(req.params.id), {complete: true}, function(err, data) {
 			if (data) {
