@@ -39,20 +39,19 @@ module.exports = {
 		);
 	},
 	signup: function(req, res) {
-		if (lib.getUser(req.body.username, function(err, user) {
-			if (user) return false;
-			else return true; })
-			&& validateEmail(req.body.email) && req.body.password && req.body.password === req.body.password2) {
-			lib.createUser(req.body.username
-				, req.body.email
-				, req.body.password, function(err, user) {
-					console.log(user);
-					res.redirect('/chat');
-				}
-			);
-		} else {
-			res.redirect('/signup');
-		}
+		lib.getUser(req.body.username, function(err, user) {
+			if (user === null && validateEmail(req.body.email) && req.body.password && req.body.password === req.body.password2) {
+				lib.createUser(req.body.username
+					, req.body.email
+					, req.body.password, function(err, user) {
+						console.log(user);
+						res.redirect('/chat');
+					}
+				);
+			} else {
+				res.redirect('/signup');
+			}
+		});
 	},
 	createTodo: function(req, res) {
 		lib.getUser(req.params.assignee, function(err, assignee) {
