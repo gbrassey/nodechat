@@ -13,6 +13,15 @@ function mainController($scope, $http) {
 		.error(function(data) {
 			console.log('Error: ' + data);
 		});
+	
+	$http.get('/api/users')
+		.success(function(data) {
+			$scope.users = data;
+			console.log(data);
+		})
+		.error(function(data) {
+			console.log('Error: ' + data);
+		});
 
 	// when submitting the add form, send the text to the node API
 	// $scope.createTodo = function() {

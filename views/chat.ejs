@@ -3,32 +3,28 @@
 		<div class="chat-wrap">
 			<div id="chatEntries"></div>
 		</div>
-		<div id="chatControls">
+		<div id="chatControls" class="chat-controls">
 			<input type="input" id="messageInput" class="form-control">
 			<button id="msgSubmit" type="button" class="btn btn-primary">Send</button>
 		</div>
 	</div>
 	<div class="col-sm-4">
 		<div class="todo-wrap">
-			<select class="form-control">
-				<option value="Global">Global</option>
-				<option value="Dave">Dave</option>
-				<option value="George">George | {{todos.length}}</option>
-				<option value="Michael">Michael</option>
+			<select ng-model="todoDisplay.assignee_id" class="form-control">
+				<option value="">Global</option>
+				<option ng-repeat="user in users" value="{{user._id}}">{{user.username}}</option>
 			</select>
 			<div class="todo-list">
 				<ul>
-					<li ng-repeat="todo in todos"><div class="checkbox"><label><input type="checkbox" ng-click="toggleTodo(todo._id)">{{todo.todo}}</label></div></li>
+					<li ng-repeat="todo in todos | filter:todoDisplay"><div class="checkbox"><label><input type="checkbox" ng-click="toggleTodo(todo._id)" ng-checked="{{todo.complete}}">{{todo.todo}}</label></div></li>
 				</ul>
 			</div>
 		</div>
 		<div id="todoControls">
 			<input type="input" id="todoInput" class="form-control">
 			<select id="assignee" class="form-control">
-				<option value="Global">Global</option>
-				<option value="Dave">Dave</option>
-				<option value="George">George</option>
-				<option value="Michael">Michael</option>
+				<option value="">Global</option>
+				<option ng-repeat="user in users" value="{{user._id}}">{{user.username}}</option>
 			</select>
 			<button id="todoSubmit" type="button" class="btn btn-primary">Send</button>
 		</div>

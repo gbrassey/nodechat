@@ -18,6 +18,14 @@ module.exports = {
 				res.send('0');
 		});
 	},
+	getUsers: function(req, res) {
+		lib.getUsers(function(err, users) {
+			if (users)
+				res.json(users);
+			else
+				res.send(false);
+		});
+	},
 	login: function(req, res) {
 		lib.authenticate(req.body.username
 			, req.body.password, function(err, id) {
@@ -48,17 +56,21 @@ module.exports = {
 	},
 	createTodo: function(req, res) {
 		lib.getUser(req.params.assignee, function(err, assignee) {
-			lib.createTodo(req.params.todo, String(assignee._id), String(req.session._id), function(err, data) {
-				if (data) {
-					lib.getUserByID(String(data.assignee_id), function(err, user) {
-						if (user) {
-							data.assignee = user.username;
-							res.send(data);
-						} else res.send(false);
-					});
-				}
-				else res.send(false);
-			});			
+			if (assignee) {
+				lib.createTodo(req.params.todo, String(assignee._id), String(req.session._id), function(err, data) {
+					if (data) {
+						lib.getUserByID(String(data.assignee_id), function(err, user) {
+							if (user) {
+								data.assignee = user.username;
+								res.send(data);
+							} else res.send(false);
+						});
+					}
+					else res.send(false);
+				});
+			} else {
+				res.send(false);
+			}
 		});
 	},
 	getTodos: function(req, res) {
@@ -68,7 +80,7 @@ module.exports = {
 		});
 	},
 	getAssignedTodos: function(req, res) {
-		lib.getUser(req.params.username, function(err, user) {
+		lib.getUser(String(req.params.username), function(err, user) {
 			if (user) {
 				lib.getAssignedTodos(String(user._id), function(err, data) {
 					if (data) {

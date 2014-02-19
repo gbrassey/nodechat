@@ -33,16 +33,21 @@
 }
 
 /* line 29, ../../sass/screen.scss */
+.chat-controls {
+  padding-left: 3px;
+}
+
+/* line 32, ../../sass/screen.scss */
 .todo-wrap {
   height: 200px;
   margin: 20px 0;
 }
-/* line 32, ../../sass/screen.scss */
+/* line 35, ../../sass/screen.scss */
 .todo-wrap .todo-list {
   height: 166px;
   overflow-y: scroll;
 }
-/* line 35, ../../sass/screen.scss */
+/* line 38, ../../sass/screen.scss */
 .todo-wrap .todo-list ul {
   list-style: none;
   padding: 0;
