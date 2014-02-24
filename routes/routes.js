@@ -1,4 +1,4 @@
-var lib = require('../lib/lib')
+var lib = require('../lib/lib');
 
 module.exports = {
 	getSignup: function(req, res) {
@@ -117,8 +117,17 @@ module.exports = {
 			if (data) res.send('1');
 			else res.send(false);
 		});
+	},
+	getMessages: function(req, res) {
+		lib.getMessages(function(err, data) {
+			if (data) {
+				res.json(data);
+			} else {
+				res.send(false);
+			}
+		});
 	}
-}
+};
 
 function validateEmail(email) { 
 	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

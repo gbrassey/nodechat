@@ -1,26 +1,3 @@
-if (location.pathname=="/chat") {
-	var socket = io.connect();
-
-	socket.on('message', function(data) {
-		addMessage(data['message'], data['username']);
-	});
-}
-
-function addMessage(msg, username) {
-	$("#chatEntries").append('<div class="message"><p><span class="username">' + username + '</span> : <span class="message">' + msg + '</span></p></div>');
-	if ($('.chat-wrap').scrollTop() > ($('#chatEntries').height() - 250)) {
-		$(".chat-wrap").scrollTop($(".chat-wrap")[0].scrollHeight);
-	}
-}
-
-function sendMessage() {
-	if ($('#messageInput').val() != "") {
-		socket.emit('message', $('#messageInput').val());
-		addMessage($('#messageInput').val(), 'Me', new Date().toISOString(), true);
-		$('#messageInput').val('');
-	}
-}
-
 function setLogin() {
 	if ($("#username").val() != "" || $("#password").val() != "") {
 		socket.emit('setLogin', { username: $('#username').val(), password: $('#password').val() });
@@ -29,31 +6,13 @@ function setLogin() {
 	}
 }
 
-function sendTodo() {
-	var todo = $("#todoInput").val(),
-		assignee = $("#assignee").val();
-	if (todo != "") {
-		$.ajax({
-			type: 'GET'
-			, url: '/api/todo/create/' + assignee + '/' + todo
-				}).done(function(created) {
-					if (created) {
-						console.log('created ' + created.todo + ' todo for ' + created.assignee);
-					}
-					else {
-						console.log('error');
-					}
-		});
-	}
-}
 
 $(function() {
 	$("#setLogin").click(function() { setLogin() });
-	$("#msgSubmit").click(function() { sendMessage(); });
-	$("#todoSubmit").click(function() { sendTodo(); });
+	// $("#msgSubmit").click(function() { sendMessage(); });
 	$("#messageInput").keyup(function(event){
 	    if(event.keyCode == 13){
-	        $("#messageInput + #submit").click();
+	        $("#msgSubmit").click();
 	    }
 	});
 

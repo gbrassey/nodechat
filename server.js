@@ -46,21 +46,31 @@ db.open(function() {
 		if (socket.handshake.session._id) {
 			lib.getUserByID(socket.handshake.session._id, function(err, user) {
 				socket.set('username', user.username);
-				socket.emit('message', { 'message': 'Welcome to Chat ' + user.username, username: 'SYSTEM' });
 			});
 		} else {
 			socket.emit('message', { message: "There was an error. Please refresh.", username: 'SYSTEM' });
 		}
 		socket.on('message', function(message) {
 			socket.get('username', function(error, username) {
-				var data = { 'message': message, username: username };
+				var data = { message: message, username: username };
+				lib.addMessage(username, message, function(error, data) {
+				});
 				socket.broadcast.emit('message', data);
-				console.log('user ' + username + " send this : " + message);
 			});
 		});
 		socket.on('disconnect', function() {
 			socket.get('username', function (error, username) {
-				socket.broadcast.emit('message', { message: username + ' has left the chat', username: "SYSTEM" });
+				socket.broadcast.emit('message', { txt: username + ' has left the chat', usr: "SYSTEM" });
+			});
+		});
+		socket.on('update', function() {
+			socket.get('username', function(error, username) {
+				socket.broadcast.emit('update', { txt: username + ' has updated a todo', usr: "SYSTEM" });				
+			});
+		});
+		socket.on('create', function() {
+			socket.get('username', function(error, username) {
+				socket.broadcast.emit('create', { txt: username + ' has created a todo', usr: "SYSTEM" });				
 			});
 		});
 	});
@@ -76,6 +86,7 @@ db.open(function() {
 	app.get('/api/todo/complete/:id', routes.completeTodo);
 	app.get('/api/todo/incomplete/:id', routes.incompleteTodo);
 	app.get('/api/todo/delete/:id', routes.deleteTodo);
+	app.get('/api/chat/get', routes.getMessages);
 	app.post('/login', routes.login);
 	app.post('/signup', routes.signup);
 });
