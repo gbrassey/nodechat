@@ -4,6 +4,9 @@ module.exports = {
 	getSignup: function(req, res) {
 		res.render('signup', {title: "Signup for CHAT!!"});
 	},
+	getTemplate: function(req, res) {
+		res.render('template');
+	},
 	getLogin: function(req, res) {
 		res.render('login', {title: "Login to CHAT!!"});
 	},
@@ -28,12 +31,25 @@ module.exports = {
 	},
 	login: function(req, res) {
 		lib.authenticate(req.body.username
-			, req.body.password, function(err, id) {
-				if (id) {
-					req.session._id = id;
+			, req.body.password, function(err, data) {
+				if (data) {
+					req.session._id = data._id;
 					res.redirect('/chat');
 				} else {
 					res.redirect('/login');
+				}
+			}
+		);
+	},
+	apiLogin: function(req, res) {
+		lib.authenticate(req.body.user.username
+			, req.body.user.password, function(err, user) {
+				if (user) {
+					req.session._id = user._id;
+					console.log(req.session);
+					res.json({user: { authenticated: true, username: user.username, _id: user._id }});
+				} else {
+					res.json({failed: true});
 				}
 			}
 		);
@@ -93,7 +109,7 @@ module.exports = {
 		lib.getTodo(String(req.params.id), function(err, todo) {
 			lib.updateTodo(String(todo._id), {complete: !(todo.complete)}, function(err, data) {
 				if (data) {
-					res.send('1');
+					res.json({success: true});
 				} else res.send(false);
 			});			
 		});

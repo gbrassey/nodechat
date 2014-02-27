@@ -1,0 +1,16 @@
+<div class="login container">
+	<div class="col-sm-12">
+		<h1>Login</h1>
+		<div id="login">
+			<form id="login-form" class="form-horizontal">
+				<div class="control-group">
+					<input type="text" name="username" placeholder="Username" class="input-xlarge" ng-model="user.username">
+				</div>
+				<div class="control-group">
+					<input type="password" name="password" placeholder="Password" class="input-xlarge" ng-model="user.password">
+				</div>
+				<button class="btn btn-primary create-button" ng-click="userSubmit(user)">Submit</button>
+			</form>
+		</div>
+	</div>
+</div>

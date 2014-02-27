@@ -1,8 +1,11 @@
 'use strict';
 
 angular.module('todo.controllers', [])
-	.controller('ChatCtrl', ['$scope', 'Todos', 'Users', 'CreateTodo', 'ToggleTodo', 'Messages',
-		function($scope, Todos, Users, CreateTodo, ToggleTodo, Messages) {
+	.controller('ChatCtrl', ['$scope', '$location', 'Todos', 'Users', 'CreateTodo', 'ToggleTodo', 'Messages', 'Session',
+		function($scope, $location, Todos, Users, CreateTodo, ToggleTodo, Messages, Session) {
+			if (!Session.user.authenticated) {
+				$location.path('/');
+			}
 			var socket = io.connect();
 
 			socket.on('message', function(data) {
@@ -63,6 +66,15 @@ angular.module('todo.controllers', [])
 			};
 
 	}])
-	.controller('LoginCtrl', [function() {
-
+	.controller('LoginCtrl', ['$scope', '$location', 'Session', 
+		function($scope, $location, Session) {
+			$scope.userSubmit = function(user) {
+				Session.attempt({user: user}, function(data) {
+					if (!data.failed) {
+						$location.path('/chat');
+					} else {
+						alert("Login Failed");
+					}
+				});
+			};
 	}]);

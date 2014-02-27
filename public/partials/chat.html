@@ -1,0 +1,38 @@
+<div class="chat container">
+	<div class="col-sm-12">
+		<h1>Chat</h1>
+	</div>
+	<div class="col-sm-8">
+		<div class="chat-wrap">
+			<div id="chatEntries">
+				<div class="message" ng-repeat="message in messages"><p><span class="username">{{message.usr}}</span> : <span class="message">{{message.txt}}</span></p></div>
+			</div>
+		</div>
+		<div id="chatControls" class="chat-controls">
+			<input type="input" ng-model="messageInput" id="messageInput" class="form-control">
+			<button id="msgSubmit" ng-click="sendMessage()" type="button" class="btn btn-primary">Send</button>
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="todo-wrap">
+			<select ng-model="todoDisplay.assignee_id" class="form-control">
+				<option value="">Global</option>
+				<option ng-repeat="user in users" value="{{user._id}}">{{user.username}}</option>
+			</select>
+			<div class="todo-list">
+				<ul>
+					<li ng-repeat="todo in todos | filter:todoDisplay | orderBy:assignee"><div class="checkbox"><label><input type="checkbox" ng-click="toggleTodo(todo._id)" ng-checked="{{todo.complete}}">{{todo.todo}}</label></div></li>
+				</ul>
+			</div>
+		</div>
+		<div id="todoControls">
+			<input type="input" ng-model="todoText" class="form-control">
+			<select ng-model="todoAssignee" class="form-control">
+				<option value="">Global</option>
+				<option ng-repeat="user in users" value="{{user._id}}">{{user.username}}</option>
+			</select>
+			<button ng-click="createTodo()" type="button" class="btn btn-primary">Send</button>
+		</div>
+		</div>
+	</div>
+</div>

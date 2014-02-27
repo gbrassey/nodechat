@@ -26,7 +26,6 @@ todoServices.factory('Todos', ['$resource',
 		function($resource) {
 			return $resource('/api/todo/toggle/:id', {}, {
 				query: {method:'GET', params:{id: null}, isArray: true}
-
 			});
 		}])
 	.factory('Messages', ['$resource', 
@@ -34,4 +33,20 @@ todoServices.factory('Todos', ['$resource',
 			return $resource('api/chat/get', {}, {
 				query: { method: 'GET', isArray: true}
 			});
+		}])
+	.factory('Session', ['$resource',
+		function($resource) {
+			var Session = {
+				user: {},
+				login: $resource('api/login', {}, {
+						query: { method: 'POST', isArray: false }
+					}),
+				attempt: function(params, callback) {
+					this.login.query(params, function(data) {
+						Session.user = data.user;
+						callback(data);
+					});
+				}
+			};
+			return Session;
 		}]);
