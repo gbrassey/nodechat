@@ -26,7 +26,7 @@ module.exports = {
 			if (users)
 				res.json(users);
 			else
-				res.send(false);
+				res.json({error: true});
 		});
 	},
 	login: function(req, res) {
@@ -46,10 +46,9 @@ module.exports = {
 			, req.body.user.password, function(err, user) {
 				if (user) {
 					req.session._id = user._id;
-					console.log(req.session);
 					res.json({user: { authenticated: true, username: user.username, _id: user._id }});
 				} else {
-					res.json({failed: true});
+					res.json({error: true});
 				}
 			}
 		);
@@ -60,7 +59,6 @@ module.exports = {
 				lib.createUser(req.body.username
 					, req.body.email
 					, req.body.password, function(err, user) {
-						console.log(user);
 						res.redirect('/chat');
 					}
 				);
@@ -77,8 +75,8 @@ module.exports = {
 						lib.getUserByID(String(data.assignee_id), function(err, user) {
 							if (user) {
 								data.assignee = user.username;
-								res.send(data);
-							} else res.send(false);
+								res.json(data);
+							} else res.json({error: true});
 						});
 					}
 					else res.send(false);
@@ -91,7 +89,7 @@ module.exports = {
 	getTodos: function(req, res) {
 		lib.getTodos(function(err, data) {
 			if (data) res.json(data);
-			else res.send(false);
+			else res.json({error: true});
 		});
 	},
 	getAssignedTodos: function(req, res) {
@@ -100,9 +98,9 @@ module.exports = {
 				lib.getAssignedTodos(String(user._id), function(err, data) {
 					if (data) {
 						res.json(data);
-					} else res.send(false);
+					} else res.json({error: true});
 				})
-			} else res.send(false);
+			} else res.json({error: true});
 		});
 	},
 	toggleTodo: function(req, res) {
@@ -130,8 +128,8 @@ module.exports = {
 	},
 	deleteTodo: function(req, res) {
 		lib.deleteTodo(String(req.params.id), function(err, data) {
-			if (data) res.send('1');
-			else res.send(false);
+			if (data) res.json({success: true});
+			else res.json({error: true});
 		});
 	},
 	getMessages: function(req, res) {
@@ -139,7 +137,7 @@ module.exports = {
 			if (data) {
 				res.json(data);
 			} else {
-				res.send(false);
+				res.json({error: true});
 			}
 		});
 	}

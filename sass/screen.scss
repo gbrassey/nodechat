@@ -38,6 +38,16 @@
 		ul {
 			list-style: none;
 			padding: 0;
+			.complete {
+				color: grey;
+			}
+			.delete {
+				background-color: red;
+				cursor: pointer;
+				float: right;
+				height: 20px;
+				width: 20px;
+			}
 		}
 	}
 }

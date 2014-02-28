@@ -5,7 +5,7 @@
 	<div class="col-sm-8">
 		<div class="chat-wrap">
 			<div id="chatEntries">
-				<div class="message" ng-repeat="message in messages"><p><span class="username">{{message.usr}}</span> : <span class="message">{{message.txt}}</span></p></div>
+				<div class="message" ng-repeat="message in messages | orderBy: '_id'"><p><span class="username">{{message.usr}}</span> : <span class="message">{{message.txt}}</span></p></div>
 			</div>
 		</div>
 		<div id="chatControls" class="chat-controls">
@@ -21,7 +21,7 @@
 			</select>
 			<div class="todo-list">
 				<ul>
-					<li ng-repeat="todo in todos | filter:todoDisplay | orderBy:assignee"><div class="checkbox"><label><input type="checkbox" ng-click="toggleTodo(todo._id)" ng-checked="{{todo.complete}}">{{todo.todo}}</label></div></li>
+					<li ng-repeat="todo in todos | filter:todoDisplay | orderBy:['complete', 'assignee']"><div class="checkbox"><label ng-class="{complete: todo.complete}"><input type="checkbox" ng-click="toggleTodo(todo._id)" ng-checked="{{todo.complete}}">{{todo.todo}}</label><div class="delete" ng-click="deleteTodo(todo._id)"></div></div></li>
 				</ul>
 			</div>
 		</div>

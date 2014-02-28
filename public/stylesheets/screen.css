@@ -52,3 +52,15 @@
   list-style: none;
   padding: 0;
 }
+/* line 41, ../../sass/screen.scss */
+.todo-wrap .todo-list ul .complete {
+  color: grey;
+}
+/* line 44, ../../sass/screen.scss */
+.todo-wrap .todo-list ul .delete {
+  background-color: red;
+  cursor: pointer;
+  float: right;
+  height: 20px;
+  width: 20px;
+}

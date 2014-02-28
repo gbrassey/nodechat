@@ -22,6 +22,12 @@ todoServices.factory('Todos', ['$resource',
 				query: {method:'GET', params:{assignee: null, todo: null}, isArray:true}
 			});
 		}])
+	.factory('DeleteTodo', ['$resource',
+		function($resource) {
+			return $resource('/api/todo/delete/:id', {}, {
+				query: {method:'GET', params:{id: null}, isArray: true}
+			});
+		}])
 	.factory('ToggleTodo', ['$resource',
 		function($resource) {
 			return $resource('/api/todo/toggle/:id', {}, {
@@ -38,11 +44,10 @@ todoServices.factory('Todos', ['$resource',
 		function($resource) {
 			var Session = {
 				user: {},
-				login: $resource('api/login', {}, {
+				login: function(params, callback) {
+					$resource('api/login', {}, {
 						query: { method: 'POST', isArray: false }
-					}),
-				attempt: function(params, callback) {
-					this.login.query(params, function(data) {
+					}).query(params, function(data) {
 						Session.user = data.user;
 						callback(data);
 					});
