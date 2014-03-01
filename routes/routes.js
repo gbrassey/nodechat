@@ -68,18 +68,12 @@ module.exports = {
 		});
 	},
 	createTodo: function(req, res) {
-		lib.getUser(req.params.assignee, function(err, assignee) {
-			if (assignee) {
-				lib.createTodo(req.params.todo, String(assignee._id), String(req.session._id), function(err, data) {
+		lib.getUserByID(String(req.session._id), function(err, assigner) {
+			if (assigner) {
+				lib.createTodo(req.params.todo, req.params.assignee, assigner.username, function(err, data) {
 					if (data) {
-						lib.getUserByID(String(data.assignee_id), function(err, user) {
-							if (user) {
-								data.assignee = user.username;
-								res.json(data);
-							} else res.json({error: true});
-						});
-					}
-					else res.send(false);
+						res.json(data);
+					} else res.json({error: true});
 				});
 			} else {
 				res.send(false);

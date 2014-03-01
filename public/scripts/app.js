@@ -4,7 +4,7 @@
 
 angular.module('todoApp', [
 	'ngRoute',
-	// 'todo.filters',
+	'todo.filters',
 	'todo.services',
 	// 'todo.directives',
 	'todo.controllers'

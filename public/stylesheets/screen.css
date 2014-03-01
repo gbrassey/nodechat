@@ -53,10 +53,14 @@
   padding: 0;
 }
 /* line 41, ../../sass/screen.scss */
+.todo-wrap .todo-list ul .assignee {
+  color: grey;
+}
+/* line 42, ../../sass/screen.scss */
 .todo-wrap .todo-list ul .complete {
   color: grey;
 }
-/* line 44, ../../sass/screen.scss */
+/* line 45, ../../sass/screen.scss */
 .todo-wrap .todo-list ul .delete {
   background-color: red;
   cursor: pointer;
