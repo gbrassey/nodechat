@@ -11,6 +11,10 @@
 	width: auto;
 }
 
+input + .feedback { display: inline-block; height: 10px; margin-left: 5px; width: 10px; @include transition(background-color 1s ease); }
+.ng-invalid + .feedback { background-color: red; }
+.ng-valid + .feedback { background-color: green; }
+
 .chat-wrap {
 	border: 3px solid grey;
 	@include border-radius(5px);
@@ -39,9 +43,7 @@
 			list-style: none;
 			padding: 0;
 			.assignee { color: grey; }
-			.complete {
-				color: grey;
-			}
+			.complete { color: grey; }
 			.delete {
 				background-color: red;
 				cursor: pointer;

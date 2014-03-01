@@ -19,6 +19,10 @@ angular.module('todoApp', [
       	templateUrl: 'partials/chat.html',
       	controller: 'ChatCtrl'
       }).
+      when('/signup', {
+      	templateUrl: 'partials/signup.html',
+      	controller: 'SignupCtrl'
+      }).
       otherwise({
         redirectTo: '/'
       });

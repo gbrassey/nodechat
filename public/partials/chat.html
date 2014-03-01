@@ -3,7 +3,7 @@
 		<h1>Chat</h1>
 	</div>
 	<div class="col-sm-8">
-		<div class="chat-wrap">
+		<div class="chat-wrap" id="chat-wrap">
 			<div id="chatEntries">
 				<div class="message" ng-repeat="message in messages | orderBy: '_id'"><p><span class="username">{{message.usr}}</span> : <span class="message">{{message.txt}}</span></p></div>
 			</div>

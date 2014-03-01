@@ -44,9 +44,24 @@ todoServices.factory('Todos', ['$resource',
 		function($resource) {
 			var Session = {
 				user: {},
+				checkUsername: function(username, callback) {
+					$resource('api/user/:username', {}, {
+						query: {method:'GET', params:{username: null}, isArray: true}
+					}).get({username: username}, function(data) {
+						callback(data);
+					})
+				},
 				login: function(params, callback) {
 					$resource('api/login', {}, {
 						query: { method: 'POST', isArray: false }
+					}).query(params, function(data) {
+						Session.user = data.user;
+						callback(data);
+					});
+				},
+				signup: function(params, callback) {
+					$resource('api/signup', {}, {
+						query: {method: 'POST', isArray: false }
 					}).query(params, function(data) {
 						Session.user = data.user;
 						callback(data);

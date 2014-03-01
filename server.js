@@ -90,4 +90,5 @@ db.open(function() {
 	app.post('/login', routes.login);
 	app.post('/api/login', routes.apiLogin);
 	app.post('/signup', routes.signup);
+	app.post('/api/signup', routes.apiSignup);
 });
