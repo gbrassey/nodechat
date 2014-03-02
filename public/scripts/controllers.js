@@ -24,7 +24,14 @@ angular.module('todo.controllers', [])
 				$scope.todos = Todos.query();
 				$scope.users = Users.query();
 				$scope.messages = Messages.query();
-
+				$scope.todoDisplay = {day : 'today'};
+				$timeout(function() {
+					var chatWrap = document.getElementById('chat-wrap'),
+						chatEntries = document.getElementById('chatEntries'),
+						chatWrapHeight = chatWrap.offsetHeight,
+						chatEntriesHeight = chatEntries.offsetHeight;
+					chatWrap.scrollTop = chatEntriesHeight;
+				}, 100);
 
 				$scope.createTodo = function() {
 					if ($scope.todoAssignee && $scope.todoText) {
@@ -65,7 +72,7 @@ angular.module('todo.controllers', [])
 				$scope.sendMessage = function() {
 					if ($scope.messageInput) {
 						socket.emit('message', $scope.messageInput);
-						$scope.addMessage($scope.messageInput, 'Me');
+						$scope.addMessage($scope.messageInput, Session.user.username);
 						$scope.messageInput = '';
 					} else {
 						console.log('Cannot send empty message.');
