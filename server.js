@@ -79,6 +79,7 @@ db.open(function() {
 	app.get('/chat', lib.ensureAuthenticated, routes.getChat);
 	app.get('/api/user/:username', routes.getUser);
 	app.get('/api/users', lib.ensureAuthenticated, routes.getUsers);
+	app.get('/api/email/:email', routes.getEmail);
 	app.get('/api/todo/create/:assignee/:todo', lib.ensureAuthenticated, routes.createTodo);
 	app.get('/api/todo/get', lib.ensureAuthenticated, routes.getTodos);
 	app.get('/api/todo/get/:username', lib.ensureAuthenticated, routes.getAssignedTodos);

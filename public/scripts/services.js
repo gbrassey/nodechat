@@ -51,6 +51,13 @@ todoServices.factory('Todos', ['$resource',
 						callback(data);
 					})
 				},
+				checkEmail: function(email, callback) {
+					$resource('api/email/:email', {}, {
+						query: {method:'GET', params:{email: null}, isArray: true}
+					}).get({email: email}, function(data) {
+						callback(data);
+					})
+				},
 				login: function(params, callback) {
 					$resource('api/login', {}, {
 						query: { method: 'POST', isArray: false }

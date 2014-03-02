@@ -2,12 +2,12 @@
 	<div class="col-sm-12">
 		<h1>Signup</h1>
 		<div id="signup">
-			<form id="signup-form">
+			<form name="signupForm" id="signup-form">
 				<div class="form-group">
 					<input type="text" name="username" placeholder="Username" class="form-control" ng-model="user.username" ng-blur="checkUsername(user.username)" required /><span class="feedback"></span>
 				</div>
 				<div class="form-group">
-					<input type="email" name="email" placeholder="Email" class="form-control email" ng-model="user.email" required /><span class="feedback"></span>
+					<input type="email" name="email" placeholder="Email" class="form-control email" ng-model="user.email" ng-blur="checkEmail(user.email)" required /><span class="feedback"></span>
 				</div>
 				<div class="form-group">
 					<input type="password" name="password" placeholder="Password" class="form-control" ng-model="user.password" ng-minlength="8" required /><span class="feedback"></span>

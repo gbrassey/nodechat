@@ -109,12 +109,12 @@ angular.module('todo.controllers', [])
 	.controller('SignupCtrl', ['$scope', '$location', 'Session', 
 		function($scope, $location, Session) {
 			$scope.userSubmit = function(user) {
-				console.log(user);
 				if (validateEmail(user.email)) {
 					Session.signup({user: user}, function(data) {
 						if (!data.error) {
 							$location.path('/chat');
 						} else {
+							console.log(data);
 							alert("Signup Failed.");
 						}
 					});
@@ -128,6 +128,22 @@ angular.module('todo.controllers', [])
 					Session.checkUsername(username, function(data) {
 						if (data.exists) {
 							console.log('This username is already taken');
+							$scope.signupForm.username.$setValidity('username', false);
+						} else {
+							$scope.signupForm.username.$setValidity('username', true);
+						}
+					});
+				}
+			};
+
+			$scope.checkEmail = function(email) {
+				if (email) {
+					Session.checkEmail(email, function(data) {
+						if (data.exists) {
+							console.log('This email is already used by another account.');
+							$scope.signupForm.email.$setValidity('email', false);
+						} else {
+							$scope.signupForm.email.$setValidity('email', true);
 						}
 					});
 				}

@@ -29,6 +29,14 @@ module.exports = {
 				res.json({error: true});
 		});
 	},
+	getEmail: function(req, res) {
+		lib.getEmail(req.params.email, function(err, data) {
+			if (data)
+				res.json({exists: true});
+			else
+				res.json({exists: false});
+		});
+	},
 	login: function(req, res) {
 		lib.authenticate(req.body.username
 			, req.body.password, function(err, data) {
@@ -68,22 +76,27 @@ module.exports = {
 		});
 	},
 	apiSignup: function(req, res) {
-		lib.getUser(req.body.username, function(err, user) {
-			if (user === null && validateEmail(req.body.email) && req.body.password && req.body.password === req.body.password2) {
-				lib.createUser(req.body.username
-					, req.body.email
-					, req.body.password, function(err, user) {
-						if (user) {
-							res.json({user: {authenticated: true, username: user.username, _id: user._id }});
-						} else {
-							res.json({error: true});
+		if (req.body.user.username) {
+			lib.getUser(req.body.user.username, function(err, user) {
+				if (user === null && validateEmail(req.body.user.email) && req.body.user.password && req.body.user.password === req.body.user.password2) {
+					lib.createUser(req.body.user.username
+						, req.body.user.email
+						, req.body.user.password, function(err, user) {
+							if (user) {
+								req.session._id = user._id;
+								res.json({user: {authenticated: true, username: user.username, _id: user._id }});
+							} else {
+								res.json({error: '3'});
+							}
 						}
-					}
-				);
-			} else {
-				res.json({error: true});
-			}
-		});
+					);
+				} else {
+					res.json({error: '2'});
+				}
+			});
+		} else {
+			res.json({error: '1'});
+		}
 	},
 	createTodo: function(req, res) {
 		lib.getUserByID(String(req.session._id), function(err, assigner) {
