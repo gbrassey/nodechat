@@ -3,13 +3,16 @@
 @import "partials/base";
 
 body { background-color: $quinary; }
-h1 { color: $primary; }
+h1 { color: $secondary; }
 .form-control {
 	display: inline-block;
 	vertical-align: middle;
 	width: auto;
 }
-.btn-primary { background-color: $tertiary; &:hover { background-color: lighten($tertiary, 10%); }}
+.btn-primary { 
+	background-color: $secondary;
+	@include transition(background-color 0.5s ease);
+	&:hover { background-color: lighten($secondary, 10%); }}
 
 @import "partials/login";
 @import "partials/chat";

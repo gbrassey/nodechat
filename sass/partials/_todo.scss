@@ -10,8 +10,8 @@
 		ul {
 			list-style: none;
 			padding: 0;
-			.assignee { color: grey; }
 			.complete { color: grey; }
+			.assignee { color: $secondary; }
 			.delete {
 				background-color: $tertiary;
 				cursor: pointer;
