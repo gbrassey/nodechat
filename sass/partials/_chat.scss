@@ -1,0 +1,21 @@
+
+@import "partials/base";
+
+.chat-wrap {
+	border: 3px solid $secondary;
+	@include border-radius(5px);
+	height: 200px;
+	margin: 20px 0;
+	overflow-y: scroll;
+	width: 100%;
+	#chatEntries {
+		padding: 0 10px;
+	}
+	.username {
+		font-weight: 500;
+		color: darken($tertiary, 15%);
+	}
+}
+.chat-controls {
+	padding-left: 3px;
+}

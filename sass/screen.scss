@@ -1,56 +1,17 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+@import "vendor/bootstrap.min";
 
-@import "compass/css3";
+@import "partials/base";
 
+body { background-color: $quinary; }
+h1 { color: $primary; }
 .form-control {
 	display: inline-block;
 	vertical-align: middle;
 	width: auto;
 }
+.btn-primary { background-color: $tertiary; &:hover { background-color: lighten($tertiary, 10%); }}
 
-input + .feedback { display: inline-block; height: 10px; margin-left: 5px; width: 10px; @include transition(background-color 1s ease); }
-.ng-invalid + .feedback { background-color: red; }
-.ng-valid + .feedback { background-color: green; }
+@import "partials/login";
+@import "partials/chat";
+@import "partials/todo";
 
-.chat-wrap {
-	border: 3px solid grey;
-	@include border-radius(5px);
-	height: 200px;
-	margin: 20px 0;
-	overflow-y: scroll;
-	width: 100%;
-	#chatEntries {
-		padding: 0 10px;
-	}
-	.username {
-		font-weight: 500;
-		color: darken(red, 15%);
-	}
-}
-.chat-controls {
-	padding-left: 3px;
-}
-.todo-wrap {
-	height: 200px;
-	margin: 20px 0;
-	.todo-list {
-		height: 166px;
-		overflow-y: scroll;
-		ul {
-			list-style: none;
-			padding: 0;
-			.assignee { color: grey; }
-			.complete { color: grey; }
-			.delete {
-				background-color: red;
-				cursor: pointer;
-				float: right;
-				height: 20px;
-				width: 20px;
-			}
-		}
-	}
-}

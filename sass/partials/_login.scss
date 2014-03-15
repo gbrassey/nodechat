@@ -1,0 +1,8 @@
+
+@import "partials/base";
+
+
+input + .feedback { display: inline-block; height: 10px; margin-left: 5px; width: 10px; @include transition(background-color 1s ease); }
+.ng-invalid + .feedback { background-color: $tertiary; }
+.ng-valid + .feedback { background-color: $quaternary; }
+
