@@ -12,7 +12,8 @@ h1 { color: $secondary; }
 .btn-primary { 
 	background-color: $secondary;
 	@include transition(background-color 0.5s ease);
-	&:hover { background-color: lighten($secondary, 10%); }}
+	&:hover { background-color: lighten($secondary, 10%); }
+}
 
 @import "partials/login";
 @import "partials/chat";
