@@ -81,9 +81,7 @@ db.open(function() {
 			});
 		});
 	});
-	app.get('/signup', routes.getSignup);
 	app.get('/', routes.getTemplate);
-	app.get('/chat', lib.ensureAuthenticated, routes.getChat);
 	app.get('/api/user/:username', routes.getUser);
 	app.get('/api/users', lib.ensureAuthenticated, routes.getUsers);
 	app.get('/api/email/:email', routes.getEmail);
@@ -99,4 +97,5 @@ db.open(function() {
 	app.post('/api/login', routes.apiLogin);
 	app.post('/signup', routes.signup);
 	app.post('/api/signup', routes.apiSignup);
+	app.use(function(req, res) { res.render('404') });
 });
