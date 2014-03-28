@@ -8,6 +8,10 @@ angular.module('todo.controllers', [])
 			} else {
 				var socket = io.connect();
 				var audio = document.getElementById('notification');
+				var title = "Chapp";
+				window.addEventListener('focus', function(e) {
+					document.title = title;
+				}, false);
 
 				socket.on('message', function(data) {
 					$scope.addMessage(data.message, data.username);
@@ -84,6 +88,16 @@ angular.module('todo.controllers', [])
 					$scope.messages.push({usr: username, txt: msg});
 					$timeout(scrollUpdate, 50);
 					audio.play();
+					if (!document.hasFocus()) {
+						var index = document.title.indexOf('|');
+						var counter = 1;
+						var message = ' new message!';
+						if (index !== -1) {
+							counter += parseInt(document.title.substring(index + 2));
+							message = ' new messages!';
+						}
+						document.title = title + ' | ' + counter + message;
+					}
 				};
 
 
