@@ -53,6 +53,8 @@ db.open(function() {
 		if (socket.handshake.session._id) {
 			lib.getUserByID(socket.handshake.session._id, function(err, user) {
 				socket.set('username', user.username);
+				var data = { message: user.username + ' has joined the chat', username: "SYSTEM" }
+				socket.broadcast.emit('message', data);
 			});
 		} else {
 			socket.emit('message', { message: "There was an error. Please refresh.", username: 'SYSTEM' });
@@ -67,7 +69,8 @@ db.open(function() {
 		});
 		socket.on('disconnect', function() {
 			socket.get('username', function (error, username) {
-				socket.broadcast.emit('message', { txt: username + ' has left the chat', usr: "SYSTEM" });
+				var data = { message: username + ' has left the chat', username: "SYSTEM" }
+				socket.broadcast.emit('message', data);
 			});
 		});
 		socket.on('update', function() {

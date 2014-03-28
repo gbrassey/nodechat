@@ -8,10 +8,10 @@
 				<div class="message" ng-repeat="message in messages | orderBy: '_id'"><p><span class="username">{{message.usr}}</span> : <span class="message">{{message.txt}}</span></p></div>
 			</div>
 		</div>
-		<div id="chatControls" class="chat-controls">
+		<form ng-submit="sendMessage()" id="chatControls" class="chat-controls">
 			<input type="input" ng-model="messageInput" id="messageInput" class="form-control">
-			<button id="msgSubmit" ng-click="sendMessage()" type="button" class="btn btn-primary">Send</button>
-		</div>
+			<input id="msgSubmit" type="submit" class="btn btn-primary" value="Send">
+		</form>
 	</div>
 	<div class="col-sm-4">
 		<div class="todo-wrap">
@@ -29,14 +29,20 @@
 				</ul>
 			</div>
 		</div>
-		<div id="todoControls">
+		<form ng-submit="createTodo()" id="todoControls">
 			<input type="input" ng-model="todoText" class="form-control">
 			<select ng-model="todoAssignee" class="form-control">
 				<option value="">Global</option>
 				<option ng-repeat="user in users" value="{{user.username}}">{{user.username}}</option>
 			</select>
-			<button ng-click="createTodo()" type="button" class="btn btn-primary">Send</button>
-		</div>
+			<input type="submit" class="btn btn-primary" value="Submit">
+		</form>
 		</div>
 	</div>
+</div>
+<div>
+	<audio id="notification" preload="auto">
+		<source src="audio/notification.mp3">
+		Your browser does not support the <code>audio</code> element.
+	</audio>
 </div>

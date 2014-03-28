@@ -7,6 +7,7 @@ angular.module('todo.controllers', [])
 				$location.path('/');
 			} else {
 				var socket = io.connect();
+				var audio = document.getElementById('notification');
 
 				socket.on('message', function(data) {
 					$scope.addMessage(data.message, data.username);
@@ -82,6 +83,7 @@ angular.module('todo.controllers', [])
 				$scope.addMessage = function(msg, username) {
 					$scope.messages.push({usr: username, txt: msg});
 					$timeout(scrollUpdate, 50);
+					audio.play();
 				};
 
 
