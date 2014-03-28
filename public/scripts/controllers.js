@@ -36,7 +36,7 @@ angular.module('todo.controllers', [])
 						chatWrapHeight = chatWrap.offsetHeight,
 						chatEntriesHeight = chatEntries.offsetHeight;
 					chatWrap.scrollTop = chatEntriesHeight;
-				}, 50);
+				}, 100);
 
 				$scope.createTodo = function() {
 					if ($scope.todoAssignee && $scope.todoText) {
