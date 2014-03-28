@@ -32,7 +32,7 @@ angular.module('todo.controllers', [])
 				$scope.todoDisplay = {day : 'today'};
 				$timeout(function() {
 					var chatWrap = document.getElementById('chat-wrap'),
-						chatEntries = document.getElementById('chatEntries'),
+						chatEntries = document.getElementById('chat-entries'),
 						chatWrapHeight = chatWrap.offsetHeight,
 						chatEntriesHeight = chatEntries.offsetHeight;
 					chatWrap.scrollTop = chatEntriesHeight;
@@ -104,7 +104,7 @@ angular.module('todo.controllers', [])
 			}
 			function scrollUpdate () {
 				var chatWrap = document.getElementById('chat-wrap'),
-					chatEntries = document.getElementById('chatEntries'),
+					chatEntries = document.getElementById('chat-entries'),
 					chatWrapHeight = chatWrap.offsetHeight,
 					chatEntriesHeight = chatEntries.offsetHeight;
 				if (chatWrap.scrollTop > chatEntriesHeight - chatWrapHeight - 50) {

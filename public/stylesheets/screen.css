@@ -7525,7 +7525,7 @@ input + .feedback {
   width: 100%;
 }
 /* line 11, ../../sass/partials/_chat.scss */
-.chat-wrap #chatEntries {
+.chat-wrap .chat-entries {
   padding: 0 10px;
 }
 /* line 14, ../../sass/partials/_chat.scss */
@@ -7537,6 +7537,14 @@ input + .feedback {
 /* line 19, ../../sass/partials/_chat.scss */
 .chat-controls {
   padding-left: 3px;
+}
+
+/* line 22, ../../sass/partials/_chat.scss */
+.user-list {
+  float: right;
+  height: 200px;
+  width: 10px;
+  background: #2a80b9;
 }
 
 /* line 4, ../../sass/partials/_todo.scss */

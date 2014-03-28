@@ -8,7 +8,7 @@
 	margin: 20px 0;
 	overflow-y: scroll;
 	width: 100%;
-	#chatEntries {
+	.chat-entries {
 		padding: 0 10px;
 	}
 	.username {
@@ -18,4 +18,10 @@
 }
 .chat-controls {
 	padding-left: 3px;
+}
+.user-list {
+	float: right;
+	height: 200px;
+	width: 10px;
+	background: $secondary;
 }

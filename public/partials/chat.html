@@ -4,7 +4,10 @@
 	</div>
 	<div class="col-sm-8">
 		<div class="chat-wrap" id="chat-wrap">
-			<div id="chatEntries">
+			<!-- <div id="user-list" class="user-list">
+
+			</div> -->
+			<div id="chat-entries" class="chat-entries">
 				<div class="message" ng-repeat="message in messages | orderBy: '_id'"><p><span class="username">{{message.usr}}</span> : <span class="message">{{message.txt}}</span></p></div>
 			</div>
 		</div>
