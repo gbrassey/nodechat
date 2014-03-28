@@ -114,8 +114,6 @@ module.exports = {
 	getTodos: function(req, res) {
 		lib.getTodos(function(err, data) {
 			if (data) {
-				
-				console.log(data);
 				res.json(data);
 			}
 			else res.json({error: true});
