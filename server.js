@@ -19,6 +19,13 @@ app.configure(function() {
 	app.set('view engine', 'ejs');
 	app.set('view options', { layout: false });
 });
+app.configure('development', function () {
+	app.use(express.errorHandler(
+		{dumpExceptions:true, showStack:true }));
+});
+app.configure('production', function () {
+	app.use(express.errorHandler());
+});
 
 io.configure(function() {
 	io.set('authorization', function(handshake, accept) {
@@ -31,12 +38,12 @@ io.configure(function() {
 					accept('Session not found.', false);
 				} else {
 					handshake.session = session;
+					accept(null, true);
 				}
 			});
 		} else {
-			accept('No session transmitted.', false);
+			return accept('No session transmitted.', false);
 		}
-		accept(null, true);
 	});
 });
 
